@@ -193,10 +193,94 @@
     <template #title>KONTAK</template>
     <template #subtitle>Informasi untuk menghubungi pengelola wisata.</template>
 
+    <!-- MAP -->
     <div class="mb-8">
       <MapSection />
     </div>
 
+    <!-- FORM KONTAK -->
+    <div class="max-w-3xl mx-auto mb-10">
+      <h3 class="text-lg md:text-xl font-semibold text-slate-800 mb-3 text-center">
+        Kirim Pesan ke Pengelola
+      </h3>
+      <p class="text-sm text-slate-600 mb-4 text-center max-w-xl mx-auto">
+        Tinggalkan pertanyaan atau rencana kunjunganmu melalui formulir di bawah ini.
+        Kami akan berusaha merespons secepat mungkin.
+      </p>
+
+      <form
+        @submit.prevent="handleSubmit"
+        novalidate
+        class="bg-white rounded-2xl shadow-md p-5 md:p-6 space-y-4"
+      >
+        <!-- Nama -->
+        <div>
+          <label class="block text-sm font-medium text-slate-700 mb-1">
+            Nama Lengkap
+          </label>
+          <input
+            v-model="formNama"
+            type="text"
+            class="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm md:text-base
+                   focus:outline-none focus:ring-2 focus:ring-sky-400 focus:border-sky-400"
+            placeholder="Masukkan nama kamu"
+          />
+        </div>
+      
+        <!-- Email -->
+        <div>
+          <label class="block text-sm font-medium text-slate-700 mb-1">
+            E-mail
+          </label>
+          <input
+            v-model="formEmail"
+            type="email"
+            class="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm md:text-base
+                   focus:outline-none focus:ring-2 focus:ring-sky-400 focus:border-sky-400"
+            placeholder="contoh@email.com"
+          />
+        </div>
+      
+        <!-- Pesan -->
+        <div>
+          <label class="block text-sm font-medium text-slate-700 mb-1">
+            Pesan
+          </label>
+          <textarea
+            v-model="formPesan"
+            rows="4"
+            class="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm md:text-base
+                   focus:outline-none focus:ring-2 focus:ring-sky-400 focus:border-sky-400 resize-none"
+            placeholder="Tulis pertanyaan atau rencana kunjunganmu di sini..."
+          ></textarea>
+        </div>
+      
+        <!-- Tombol -->
+        <div class="flex justify-center">
+          <button
+            type="submit"
+            class="inline-flex items-center justify-center px-6 py-2.5 rounded-full
+                   bg-sky-600 text-white text-sm md:text-base font-semibold
+                   hover:bg-sky-700 active:bg-sky-800
+                   shadow-md hover:shadow-lg
+                   transition-all duration-200"
+          >
+            Kirim Pesan
+          </button>
+        </div>
+      
+        <!-- Pesan sukses -->
+        <p
+          v-if="formSuccess"
+          class="mt-2 text-sm text-emerald-700 text-center bg-emerald-50
+                 border border-emerald-200 rounded-lg px-4 py-2"
+        >
+          Terima kasih, pesan kamu sudah terkirim.
+        </p>
+      </form>
+    </div>
+
+    <!-- KARTU KONTAK -->
     <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
       <ContactCard
         v-for="item in kontak"
@@ -351,7 +435,7 @@ const reviews = [
     id: 2,
     authorName: 'Tanoss Erpan',
     text: 'jangan ragu jangan bimbang ke bontang udah pasti senang, beras basah banyak banget bulu babinya guys sempat nangkap juga bintang laut kalo kesini wajib bawa kacawa mata renang biar bisa ala ala snorkling cuma pelabuhan kapal nya kotor banget banyak sampah ya ga mengecewakan lah beras basah akses air bersih itu ada cuman beli satu dirigen itu 5k cukup lah ya, saran kalo mau kesini vawa powerbank karena listrik disini bayar jadi kalo mau cas hp misalnya itu bayar 10k guys harus prepare banget lah pokoknya jangan modal nekat',
-    rate: 5,
+    rate: 4,
     authorUrl: 'https://maps.app.goo.gl/Q8cKQnfYbNwoYben7'
   },
   {
@@ -362,13 +446,36 @@ const reviews = [
     authorUrl: 'https://maps.app.goo.gl/XbBieW7BDX8EifXk8'
   }
 ]
-
-
-
 // animasi ulasan (intersection)
 const reviewGridRef = ref(null)
 const reviewsInView = ref(false)
 let reviewObserver
+
+const formNama = ref('')
+const formEmail = ref('')
+const formPesan = ref('')
+const formSuccess = ref(false)
+
+const handleSubmit = () => {
+  if (
+    !formNama.value.trim() ||
+    !formEmail.value.trim() ||
+    !formPesan.value.trim()
+  ) {
+    alert('Harap isi nama, email, dan pesan terlebih dahulu.')
+    return
+  }
+
+  formSuccess.value = true
+
+  formNama.value = ''
+  formEmail.value = ''
+  formPesan.value = ''
+
+  setTimeout(() => {
+    formSuccess.value = false
+  }, 4000)
+}
 
 // KONTAK
 const kontak = [
@@ -415,7 +522,6 @@ onMounted(() => {
   )
   if (reviewGridRef.value) reviewObserver.observe(reviewGridRef.value)
 
-  // (opsional) animasi album bisa pakai observer ini jika mau
   albumObserver = new IntersectionObserver(
     ([entry]) => {
     },

@@ -21,7 +21,7 @@
       :style="heroImage ? { backgroundImage: `url(${heroImage})` } : {}"
     />
 
-    <!-- Overlay gelap tipis seperti di Bukit Kebo -->
+    <!-- Overlay gelap tipis-->
     <div
       class="absolute inset-0 -z-10 bg-black/30"
     ></div>
