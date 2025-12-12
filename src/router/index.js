@@ -11,6 +11,7 @@ const router = createRouter({
     { path: "/album", name: "album", component: HomePage },
     { path: "/ulasan", name: "ulasan", component: HomePage },
     { path: "/kontak", name: "kontak", component: HomePage },
+    { path: "/cots", name: "cots", component: HomePage },
   ],
 
   scrollBehavior(to) {
@@ -21,6 +22,7 @@ const router = createRouter({
       album: "#album",
       ulasan: "#ulasan",
       kontak: "#kontak",
+      cots: "#cots"
     };
 
     if (targets[to.name]) {

@@ -110,7 +110,8 @@ const links = [
   { name: 'tentang',   label: 'Tentang',   to: '/tentang' },
   { name: 'album',     label: 'Album',     to: '/album' },
   { name: 'ulasan',    label: 'Ulasan',    to: '/ulasan' },
-  { name: 'kontak',    label: 'Kontak',    to: '/kontak' }
+  { name: 'kontak',    label: 'Kontak',    to: '/kontak' },
+  { name: 'About Me',    label: 'AboutMe',    to: '/cots' }
 ]
 
 const isActive = (link) => route.name === link.name

@@ -292,6 +292,47 @@
       />
     </div>
   </PageSection>
+
+  <!-- PAGE BARU -->
+    <section
+      id="cots"
+      class="bg-slate-900 bg-fixed bg-cover bg-center"
+      :style="{ backgroundImage: `url(${album4})` }"
+    >
+      <div class="bg-slate-900/80">
+        <PageSection id="">
+          <template #title>
+            <span class="text-white">
+              <span class="text-amber-400">A</span>BOUT ME
+            </span>
+          </template>
+
+          <div class="flex flex-col lg:flex-row gap-8 items-center">
+            <div class="lg:w-[50%] text-sm md:text-base text-slate-100 leading-relaxed">
+              <h1 class="text-2xl md:text-3xl font-bold uppercase mb-3">
+                  Muhammad Ardian Saputra
+              </h1>
+              <h2 class="text-sm mb-4">
+                  11211055 - INFORMATIKA - ITK
+              </h2>
+              <p>
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+                when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, 
+                remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+              </p>
+            </div>
+          </div>
+          <div class="lg:w-[50%]">
+              <div
+                class="bg-black/40 rounded-xl h-64 md:h-80 lg:h-[300px]
+                       overflow-hidden shadow-2xl"
+              >
+              </div>
+            </div>
+          <FacilityGrid :list="cotscard" />
+        </PageSection>
+      </div>
+    </section>
 </template>
 
 <script setup>
@@ -394,6 +435,31 @@ const fasilitas = [
     image: fSpotFoto
   }
 ]
+
+//data card
+const cotscard = ref([
+  {
+    id: 1,
+    title: 'Ngoding',
+    description:
+      'Kadang Kadang Bisa, Kadang2 YTTA',
+    image: album3
+  },
+  {
+    id: 2,
+    title: 'Bermain Game',
+    description:
+      'Selalu Bisa dalam kondisi apapun',
+    image: album4
+  },
+    {
+    id: 3,
+    title: 'Game Developer',
+    description:
+      'Unity, Unreal Engine, Roblox Studio',
+    image: album5
+  }
+])
 
 // DATA ALBUM
 const photos = [
